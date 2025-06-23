@@ -1,0 +1,26 @@
+# Python（Django）
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+
+# Node.js（Next.js）
+node_modules/
+.next/
+out/
+
+# Flutter
+build/
+.dart_tool/
+.packages
+flutter-app/.idea/
+flutter-app/.dart_tool/
+flutter-app/build/
+
+# VSCode設定
+.vscode/
+
+# Docker
+*.log

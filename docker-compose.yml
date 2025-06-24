@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  # Django バックエンドAPIコンテナ
+  backend:
+    build:
+      context: ./django-backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./django-backend:/app
+    ports:
+      - "8000:8000"
+    container_name: django-backend
+    tty: true
+
+  # Next.js フロントエンドコンテナ
+  frontend:
+    build:
+      context: ./next-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./next-frontend:/app
+    ports:
+      - "3000:3000"
+    container_name: next-frontend
+    tty: true
+
+  # Flutter Web コンテナ
+  flutter-web:
+    build:
+      context: ./flutter-app
+      dockerfile: Dockerfile
+    volumes:
+      - ./flutter-app:/app
+    ports:
+      - "8080:8080"
+    container_name: flutter-web
+    tty: true
+
+  # Nginx リバースプロキシコンテナ
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend
+      - frontend
+      - flutter-web
+    container_name: nginx-proxy

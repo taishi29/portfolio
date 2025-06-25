@@ -19,22 +19,11 @@ services:
       context: ./next-frontend
       dockerfile: Dockerfile
     volumes:
-      - ./next-frontend:/app
+      - ./next-frontend:/app # これだと、node_module(package.json に書かれた依存ライブラリたちを実際にインストールしたフォルダ)を上書きしてしまう。
+      - /app/node_modules # 匿名ボリュームを使用して node_modules を永続化
     ports:
       - "3000:3000"
     container_name: next-frontend
-    tty: true
-
-  # Flutter Web コンテナ
-  flutter-web:
-    build:
-      context: ./flutter-app
-      dockerfile: Dockerfile
-    volumes:
-      - ./flutter-app:/app
-    ports:
-      - "8080:8080"
-    container_name: flutter-web
     tty: true
 
   # Nginx リバースプロキシコンテナ
@@ -47,5 +36,4 @@ services:
     depends_on:
       - backend
       - frontend
-      - flutter-web
     container_name: nginx-proxy

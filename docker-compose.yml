@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  # Django バックエンドAPIコンテナ
+  backend:
+    build:
+      context: ./django-backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./django-backend:/app
+    ports:
+      - "8000:8000"
+    container_name: django-backend
+    tty: true
+
+  # Next.js フロントエンドコンテナ
+  frontend:
+    build:
+      context: ./next-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./next-frontend:/app # これだと、node_module(package.json に書かれた依存ライブラリたちを実際にインストールしたフォルダ)を上書きしてしまう。
+      - /app/node_modules # 匿名ボリュームを使用して node_modules を永続化
+    ports:
+      - "3000:3000"
+    container_name: next-frontend
+    tty: true
+
+  # Nginx リバースプロキシコンテナ
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend
+      - frontend
+    container_name: nginx-proxy

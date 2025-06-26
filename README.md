@@ -1,18 +1,16 @@
 # My Portfolio Project
-このリポジトリは、Next.js（フロントエンド）、Django（バックエンドAPI）、Flutter（Web作品）、Nginx、Dockerを用いたポートフォリオ構築プロジェクトです。
+このリポジトリは、Next.js（フロントエンド）、Django（バックエンドAPI）、Nginx、Dockerを用いたポートフォリオ構築プロジェクトです。
 
 ## ディレクトリ構成
 my-portfolio-project/
 ├── next-frontend/ # Next.js（ReactベースのUI）
 ├── django-backend/ # Django REST API
-├── flutter-app/ # Flutter Webアプリ
 ├── nginx/ # Nginx設定（任意）
 └── docker-compose.yml # 全体構成ファイル
 
 ## 使用技術
 - Next.js 14
 - Django 4
-- Flutter 3
 - Docker / docker-compose
 - AWS ECS on EC2（予定）
 
@@ -23,7 +21,3 @@ my-portfolio-project/
 - [ ] ドメイン＋HTTPS対応
 
 ---
-
-## 作者
-
-Taishi Sano

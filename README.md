@@ -20,4 +20,3 @@ my-portfolio-project/
 - [ ] ECSデプロイ構成の構築
 - [ ] ドメイン＋HTTPS対応
 
----

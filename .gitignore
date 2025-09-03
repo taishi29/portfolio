@@ -11,14 +11,6 @@ node_modules/
 .next/
 out/
 
-# Flutter
-build/
-.dart_tool/
-.packages
-flutter-app/.idea/
-flutter-app/.dart_tool/
-flutter-app/build/
-
 # VSCode設定
 .vscode/
 

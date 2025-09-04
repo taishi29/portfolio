@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-type Props = { heroVisible: boolean };
-
-export default function HeroSection({ heroVisible }: Props) {
+export default function HeroSection() {
+  const [heroVisible, setHeroVisible] = useState(false);
+  useEffect(() => setHeroVisible(true), []);
   return (
     <section className="min-h-screen flex items-center justify-center px-6">
       <div className="text-center max-w-4xl mx-auto">

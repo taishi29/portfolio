@@ -17,6 +17,23 @@ export type UiWork = {
   imageSrc?: string;
 };
 
+export type BlogApi = {
+  id: number;
+  title: string;
+  qiita_url: string;
+  description: string;
+  tags: string; // comma separated
+  created_at: string; // ISO
+};
+
+export type UiPost = {
+  date: string; // YYYY-MM-DD
+  title: string;
+  href: string; // Qiita link
+  tags: string[];
+  description: string;
+};
+
 function getApiBase(): string {
   // Use relative path when behind nginx (recommended),
   // otherwise set NEXT_PUBLIC_API_BASE=http://localhost:8000 for dev.
@@ -58,5 +75,25 @@ export async function fetchWorksServer(): Promise<UiWork[]> {
     description: w.description || "",
     href: w.github_url || "#",
     imageSrc: w.image_url || undefined,
+  }));
+}
+
+export async function fetchBlogsServer(): Promise<UiPost[]> {
+  const base = (process.env.API_BASE?.trim() || "http://backend:8000").replace(/\/$/, "");
+  const url = `${base}/api/blogs/`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Failed to fetch blogs: ${res.status}`);
+  const data = (await res.json()) as BlogApi[];
+  return data.map((b) => ({
+    title: b.title,
+    href: b.qiita_url,
+    date: new Date(b.created_at).toISOString().slice(0, 10),
+    description: b.description || "",
+    tags: b.tags
+      ? b.tags
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean)
+      : [],
   }));
 }

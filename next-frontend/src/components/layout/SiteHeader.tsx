@@ -15,6 +15,7 @@ export default function SiteHeader() {
           <nav className="hidden md:flex gap-8">
             <Link href="/#about" className="hover:text-purple-400">About</Link>
             <Link href="/#works" className="hover:text-purple-400">Works</Link>
+            <Link href="/blog" className="hover:text-purple-400">Blog</Link>
             <Link href="/contact" className="hover:text-purple-400">Contact</Link>
           </nav>
           <button className="md:hidden text-white" aria-label="menu">

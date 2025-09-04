@@ -40,11 +40,14 @@ export default function WorksSection({ works }: Props) {
                       priority={false}
                     />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-6xl transform transition-transform duration-500 will-change-transform group-hover:scale-110 group-hover:-rotate-3 group-hover:translate-y-0.5">
-                        {work.imageSrc ?? "/image_not_found.png"}
-                      </div>
-                    </div>
+                    <Image
+                      src="/image_not_found.png"
+                      alt="No image"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover opacity-80"
+                      priority={false}
+                    />
                   )}
                 </div>
 

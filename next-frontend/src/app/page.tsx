@@ -1,43 +1,18 @@
-"use client";
-
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import WorksSection from "@/components/sections/WorksSection";
 import ContactCta from "@/components/sections/ContactCta";
 import type { Work } from "@/types/work";
+import { fetchWorksServer } from "@/lib/api";
 
-export default function Portfolio() {
-  const [heroVisible, setHeroVisible] = useState(false);
-
-  useEffect(() => {
-    setHeroVisible(true);
-  }, []);
-
-  const works: Work[] = useMemo(
-    () => [
-      {
-        title: "企業マッチングアプリ",
-        category: "Webアプリケーション | チーム開発",
-        description: "マッチング形式で、あなたに合う企業を紹介します。",
-        href: "#",
-        imageSrc: "/com_match.png",
-      },
-      {
-        title: "筋トレ記録アプリ",
-        category: "モバイルアプリ | 個人開発",
-        description: "日々の筋トレを記録し、進捗を可視化します。",
-        href: "#",
-        imageSrc: "/gym_log.png",
-      },
-    ],
-    []
-  );
+export default async function Portfolio() {
+  const works = (await fetchWorksServer()) as Work[];
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <main className="relative z-10">
-        <HeroSection heroVisible={heroVisible} />
+        <HeroSection />
         <AboutSection />
         <WorksSection works={works} />
         <ContactCta />

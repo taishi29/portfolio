@@ -17,6 +17,7 @@ export default function SiteHeader() {
             <Link href="/#works" className="hover:text-purple-400">Works</Link>
             <Link href="/blog" className="hover:text-purple-400">Blog</Link>
             <Link href="/contact" className="hover:text-purple-400">Contact</Link>
+            <Link href="/secret" className="hover:text-purple-400">Secret</Link>
           </nav>
           <button className="md:hidden text-white" aria-label="menu">
             <div className="w-6 h-6 flex flex-col justify-center gap-1">

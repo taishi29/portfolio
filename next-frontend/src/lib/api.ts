@@ -34,6 +34,21 @@ export type UiPost = {
   description: string;
 };
 
+// Profile
+export type ProfileApi = {
+  name: string;
+  headline?: string;
+  bio?: string;
+  cover_image_url?: string;
+};
+
+export type UiProfile = {
+  name: string;
+  headline?: string;
+  bio?: string;
+  coverImageUrl?: string;
+};
+
 function getApiBase(): string {
   // Use relative path when behind nginx (recommended),
   // otherwise set NEXT_PUBLIC_API_BASE=http://localhost:8000 for dev.
@@ -96,4 +111,40 @@ export async function fetchBlogsServer(): Promise<UiPost[]> {
           .filter(Boolean)
       : [],
   }));
+}
+
+export async function fetchProfile(signal?: AbortSignal): Promise<UiProfile | null> {
+  const base = getApiBase();
+  const url = `${base}/api/profile/`;
+  const res = await fetch(url, { signal, cache: "no-store" });
+  if (!res.ok) return null;
+  const data = await res.json();
+  const obj: ProfileApi | null = Array.isArray(data)
+    ? (data[0] as ProfileApi | undefined) || null
+    : (data as ProfileApi);
+  if (!obj) return null;
+  return {
+    name: obj.name,
+    headline: obj.headline || undefined,
+    bio: obj.bio || undefined,
+    coverImageUrl: obj.cover_image_url || undefined,
+  };
+}
+
+export async function fetchProfileServer(): Promise<UiProfile | null> {
+  const base = (process.env.API_BASE?.trim() || "http://backend:8000").replace(/\/$/, "");
+  const url = `${base}/api/profile/`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) return null;
+  const data = await res.json();
+  const obj: ProfileApi | null = Array.isArray(data)
+    ? (data[0] as ProfileApi | undefined) || null
+    : (data as ProfileApi);
+  if (!obj) return null;
+  return {
+    name: obj.name,
+    headline: obj.headline || undefined,
+    bio: obj.bio || undefined,
+    coverImageUrl: obj.cover_image_url || undefined,
+  };
 }

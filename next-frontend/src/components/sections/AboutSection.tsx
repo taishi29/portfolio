@@ -13,10 +13,21 @@ export default function AboutSection() {
               </h2>
               <p className="text-gray-400 mt-2 text-base md:text-lg tracking-wide">私について</p>
             </div>
+            {/* Simple text only (no card design) */}
+            <p className="mb-6 text-2xl md:text-3xl font-semibold leading-snug tracking-wide">
+              <span className="bg-gradient-to-r from-purple-300 via-pink-300 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_1px_6px_rgba(236,72,153,0.25)]">
+                Sano
+              </span>
+              <span className="mx-2 text-gray-500">/</span>
+              <span className="text-xl md:text-lg text-gray-300">生年月日</span>
+              <span className="mx-1 text-xl md:text-lg text-gray-500">：</span>
+              <span className="text-xl md:text-lg text-gray-100">2003年9月</span>
+            </p>
             <div className="space-y-4 text-gray-300 leading-relaxed text-base md:text-lg">
               <p>しがない情報系の学生やってます。</p>
-              <p>極平凡ですが、継続と執念で積み上げていきます。</p>
-              <p>よろしくお願いいたします。</p>
+              <p>神童でもなければ、路上の伝説でもありません。。</p>
+              <p>きらびやかな経歴とは無縁の、ただの平凡な人生を謳歌しています。</p>
+              <p>気軽に見てもらえると嬉しいです。よろしくお願いします！</p>
             </div>
           </div>
 

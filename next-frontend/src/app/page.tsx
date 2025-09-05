@@ -4,16 +4,17 @@ import AboutSection from "@/components/sections/AboutSection";
 import WorksSection from "@/components/sections/WorksSection";
 import ContactCta from "@/components/sections/ContactCta";
 import type { Work } from "@/types/work";
-import { fetchWorksServer } from "@/lib/api";
+import { fetchWorksServer, fetchProfileServer } from "@/lib/api";
 
 export default async function Portfolio() {
   const works = (await fetchWorksServer()) as Work[];
+  const profile = await fetchProfileServer();
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <main className="relative z-10">
         <HeroSection />
-        <AboutSection />
+        <AboutSection profile={profile || undefined} />
         <WorksSection works={works} />
         <ContactCta />
       </main>
